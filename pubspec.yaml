@@ -1,0 +1,146 @@
+name: ty_nvr
+description: "TY NVR Viewer application converted from Swift to Flutter."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+# Dependencies required for the app to function
+dependencies:
+  flutter:
+    sdk: flutter
+  # Provides localization support for Material, Widgets, and Cupertino components
+  flutter_localizations:
+    sdk: flutter
+  # Cupertino-style icons for iOS-like UI elements
+  cupertino_icons: ^1.0.8
+
+  # MQTT client for connecting to an MQTT broker (used by MQTTManager)
+  mqtt_client: ^10.2.0
+
+  # State management for providing view models (used in MultiProvider)
+  provider: ^6.1.2
+  # Persistent storage for simple key-value pairs
+  shared_preferences: ^2.2.2
+
+  # HTTP client for making network requests
+  http: ^1.2.1
+
+  # Video player with controls (likely used for NVR video streams)
+  chewie: ^1.7.5
+
+  # Local notifications for push notifications (used by NotificationManager)
+  flutter_local_notifications: ^17.2.2
+
+  # UI-related dependencies
+  flutter_svg: ^2.0.10  # For rendering SVG images
+  intl: ^0.19.0  # For date and number formatting (used for initializeDateFormatting)
+  cached_network_image: ^3.3.1  # For caching images loaded from the network
+  flutter_vlc_player: ^7.4.3  # VLC-based video player for advanced video playback
+  visibility_detector: ^0.4.0+2  # Detects widget visibility on screen
+  connectivity_plus: ^6.1.4  # Checks network connectivity status
+  logger: ^2.5.0  # Logging utility for debugging
+  device_info_plus: ^11.4.0  # Retrieves device information
+  timezone: ^0.9.4  # Timezone data (used for tz.initializeTimeZones)
+  path_provider: ^2.1.5  # Access to file system paths
+  video_player: ^2.9.5  # Basic video player (used with chewie)
+  permission_handler: ^12.0.0+1  # Manages runtime permissions (used in _handlePermissions)
+  gallery_saver_plus: ^3.2.4  # Saves media to device gallery
+  shimmer: ^3.0.0  # Shimmer effect for loading placeholders
+  animate_do: ^4.2.0  # Animation library for UI effects
+  google_fonts: ^6.2.1  # Google Fonts for custom typography
+  flutter_hooks: ^0.21.2  # Functional-reactive programming with hooks
+  # Potential issue: flutter_localization is not used in main.dart and may be unnecessary
+  flutter_localization: ^0.3.2
+  firebase_core: ^3.13.0  # Firebase core functionality
+  firebase_messaging: ^15.2.5  # Firebase push notifications
+  photo_manager: ^3.6.4  # Manages photo and video assets (used for PhotoManager)
+  app_settings: ^6.1.1  # Opens app settings (used for openAppSettings)
+  permission_handler_android: ^13.0.0  # Android-specific permission handling
+  flutter_new_badger: ^1.1.1  # Manages app icon badges
+  # Local package for settings screen UI
+  babstrap_settings_screen:
+    path: E:/flutter/babstrap_settings_screen
+  flutter_cache_manager: ^3.4.1  # Caches network resources
+  network_info_plus: ^6.1.4  # Retrieves network information (e.g., Wi-Fi details)
+  mjpeg_stream: ^1.0.1  # MJPEG streaming for video feeds
+  table_calendar: ^3.1.3  # Calendar widget for date selection
+  flutter_secure_storage: ^9.2.4  # Secure storage for sensitive data (used for NVR config)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^5.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/placeholder.png
+    - assets/nvr_icon.png
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
