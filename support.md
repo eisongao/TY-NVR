@@ -25,7 +25,7 @@ To enable push notifications, you need to create a Firebase project and obtain t
 ## 💬 Contact Us
 
 If you need assistance, please contact us at:  
-**Email:** [support@147lab.com](mailto:support@147lab.com)
+**Email:** [*****@*****](mailto:*****@*****)
 
 ## 🔗 About Frigate
 
