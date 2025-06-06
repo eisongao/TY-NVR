@@ -2,6 +2,10 @@
   <a href="https://apps.apple.com/us/app/ty-nvr/id6742030555" target="_blank">
     <img src="https://cdn.iphone-news.org/wp-content/uploads/2014/08/app_store_badge.png" alt="Download on the App Store" width="200">
   </a>
+  
+  <a href="https://play.google.com/store/apps/details?id=com.app.frigateNvr" target="_blank">
+    <img src="https://play.google.com/store/apps/details?id=com.ucroo.concord&hl=en_US" alt="Download on the App Store" width="200">
+  </a>
 </p>
 
 # 📷 TY-NVR
