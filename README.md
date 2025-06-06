@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://apps.apple.com/us/app/ty-nvr/id6742030555" target="_blank">
+    <img src="https://developer.apple.com/assets/elements/buttons/download-on-the-app-store/download-on-the-app-store.svg" alt="Download on the App Store" width="200">
+  </a>
+</p>
+
 # 📷 TY-NVR
 
 **TY-NVR** 是一个使用 [Flutter](https://flutter.dev) 构建的轻量级 NVR 应用，专为 [Frigate](https://frigate.video) 实时视频分析系统打造。  
