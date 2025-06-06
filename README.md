@@ -4,7 +4,7 @@
   </a>
   
   <a href="https://play.google.com/store/apps/details?id=com.app.frigateNvr" target="_blank">
-    <img src="https://play.google.com/store/apps/details?id=com.ucroo.concord&hl=en_US" alt="Download on the App Store" width="200">
+    <img src="https://hf-files-oregon.s3.amazonaws.com/hdpconcord_kb_attachments/2020/09-18/9501d8c2-babe-4f54-8df8-92692dfbc657/google-play-badge.png" alt="Download on the Google Play Store" width="200">
   </a>
 </p>
 
