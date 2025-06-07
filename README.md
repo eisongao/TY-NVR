@@ -3,7 +3,7 @@
     <img src="https://cdn.iphone-news.org/wp-content/uploads/2014/08/app_store_badge.png" alt="Download on the App Store" >
   </a>
   
-  <a href="https://play.google.com/store/apps/details?id=com.app.frigateNvr" target="_blank">
+  <a href="https://github.com/eisongao/TY-NVR/releases/download/1.0/app-release.apk" target="_blank">
     <img src="https://hf-files-oregon.s3.amazonaws.com/hdpconcord_kb_attachments/2020/09-18/9501d8c2-babe-4f54-8df8-92692dfbc657/google-play-badge.png" alt="Download on the Google Play Store" >
   </a>
 </p>
