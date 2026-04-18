@@ -11,6 +11,7 @@
 
 ###  APP 已改名Frigate NVR 
 
+##下面是旧版资料了，只是参考
 
 # 📷 TY-NVR
 
