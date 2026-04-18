@@ -8,6 +8,10 @@
   </a>
 </p>
 
+
+###  APP 已改名Frigate NVR 
+
+
 # 📷 TY-NVR
 
 **TY-NVR** 是一个使用 [Flutter](https://flutter.dev) 构建的轻量级 NVR 应用，专为 [Frigate](https://frigate.video) 实时视频分析系统打造。  
