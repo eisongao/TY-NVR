@@ -1,0 +1,192 @@
+import i18n, { t } from "i18next";
+import { initReactI18next } from "react-i18next";
+import HttpBackend from "i18next-http-backend";
+import { EventType } from "@/types/search";
+
+type LoadPathFunction = (
+  lngs: readonly string[],
+  namespaces: readonly string[],
+) => string;
+
+const supportedLngs = ["en", "zh-CN", "yue-Hant"] as const;
+type SupportedLng = (typeof supportedLngs)[number];
+
+export const normalizeI18nLanguage = (lng?: string | null): SupportedLng => {
+  if (!lng) return "en";
+
+  const normalized = lng.replace("_", "-");
+  const lower = normalized.toLowerCase();
+
+  // Frigate has no /locales/zh folder. All simplified Chinese variants must
+  // use the real folder name: /locales/zh-CN.
+  if (
+    lower === "zh" ||
+    lower.startsWith("zh-cn") ||
+    lower.startsWith("zh-sg") ||
+    lower.startsWith("zh-hans")
+  ) {
+    return "zh-CN";
+  }
+
+  // Traditional / Cantonese locale folder in this project.
+  if (
+    lower.startsWith("yue") ||
+    lower.startsWith("zh-hk") ||
+    lower.startsWith("zh-mo") ||
+    lower.startsWith("zh-tw") ||
+    lower.startsWith("zh-hant")
+  ) {
+    return "yue-Hant";
+  }
+
+  if (lower === "en" || lower.startsWith("en-")) return "en";
+
+  return supportedLngs.includes(normalized as SupportedLng)
+    ? (normalized as SupportedLng)
+    : "en";
+};
+
+const getInitialLanguage = (): SupportedLng => {
+  if (typeof window === "undefined") return "en";
+
+  const storedLanguage = window.localStorage.getItem("frigate-ui-language");
+  if (storedLanguage) return normalizeI18nLanguage(storedLanguage);
+
+  return normalizeI18nLanguage(window.navigator.language);
+};
+
+export const getTranslatedLabel = (
+  label: string,
+  type: EventType = "object",
+) => {
+  if (!label) return "";
+
+  if (type === "manual") return label;
+
+  const normalize = (s: string) =>
+    s
+      .trim()
+      .replace(/[-'\s]+/g, "_")
+      .replace(/__+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .toLowerCase();
+
+  const key = normalize(label);
+  const ns = type === "audio" ? "audio" : "objects";
+
+  return t(key, { ns });
+};
+
+i18n
+  .use(initReactI18next)
+  .use(HttpBackend)
+  .init({
+    // Important: do not hard-code lng: "en" here. Read the saved UI language
+    // before i18next initializes, otherwise the app can keep rendering English
+    // after switching language and reloading.
+    lng: getInitialLanguage(),
+    fallbackLng: "en",
+
+    supportedLngs: [...supportedLngs],
+    load: "currentOnly",
+    lowerCaseLng: false,
+    cleanCode: false,
+
+    backend: {
+      loadPath: ((
+        lngs: readonly string[],
+        namespaces: readonly string[],
+      ): string => {
+        const lng = normalizeI18nLanguage(lngs[0]);
+        const ns = namespaces[0];
+        const hash = import.meta.env.VITE_GIT_COMMIT_HASH || "unknown";
+
+        return `locales/${lng}/${ns}.json?v=${hash}`;
+      }) as LoadPathFunction,
+    },
+
+    ns: [
+      "common",
+      "objects",
+      "audio",
+      "components/camera",
+      "components/dialog",
+      "components/filter",
+      "components/icons",
+      "components/player",
+      "views/events",
+      "views/explore",
+      "views/live",
+      "views/settings",
+      "views/system",
+      "views/exports",
+    ],
+    defaultNS: "common",
+
+    react: {
+      transSupportBasicHtmlNodes: true,
+      transKeepBasicHtmlNodesFor: [
+        "br",
+        "strong",
+        "i",
+        "em",
+        "li",
+        "p",
+        "code",
+        "span",
+        "ul",
+        "ol",
+      ],
+    },
+    interpolation: {
+      escapeValue: false,
+    },
+    keySeparator: ".",
+    parseMissingKeyHandler: (key: string) => {
+      const parts = key.split(".");
+
+      if (parts[0] === "time" && parts[1]?.includes("formattedTimestamp")) {
+        const formatType = parts[parts.length - 1];
+        const formatDefaults: Record<string, string> = {
+          "12hour": "h:mm aaa",
+          "24hour": "HH:mm",
+        };
+
+        if (formatDefaults[formatType]) {
+          return formatDefaults[formatType];
+        }
+      }
+
+      if (parts[0] === "object" || parts[0] === "audio") {
+        return (
+          parts[1]
+            ?.split("_")
+            .map(
+              (word) =>
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+            )
+            .join(" ") || key
+        );
+      }
+
+      if (parts.length > 1) {
+        const lastPart = parts[parts.length - 1];
+        return lastPart
+          .split("_")
+          .map(
+            (word) =>
+              word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+          )
+          .join(" ");
+      }
+
+      return key
+        .split("_")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+        )
+        .join(" ");
+    },
+  });
+
+export default i18n;
